@@ -1,0 +1,57 @@
+<!-- THIS IS THE SEARCH BAR COMPONENT -->
+<aura:component controller="LightningController" >
+    
+    <aura:attribute name="searchBy" type="List" default="[
+    {'label': 'Product Name', 'value': 'Brawl_Mart_Product__r.Name'},
+    {'label': 'Product Category', 'value': 'Brawl_Mart_Product__r.Category__c'}
+    ]"/> 
+    
+    <aura:attribute name="selectedLocationId" type="String" />
+    
+    <aura:attribute name="filterValue" type="String" />
+    
+    <aura:registerEvent name="searchKeyInfo" type="c:searchKeyInfoEvent" />
+    <aura:registerEvent name="searchStockInfo" type="c:searchStockInfoEvent" />
+    
+    <lightning:card >
+    	<aura:set attribute="title">
+        	<div class="slds-text-heading_medium slds-text-align_center">SEARCH THE STOCK TABLE </div> 
+        </aura:set>
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size_4-of-12">
+                <div class="slds-grid">
+                	<div class="slds-col slds-size_1-of-12">
+                    	
+                    </div>
+                    <div class="slds-col slds-size_11-of-12">
+                    	<lightning:radioGroup aura:id="searchFilter"
+                              name="searchFilterName"
+                              label="What would you like to search by?"
+                              value="{!v.filterValue}"
+                              options="{!v.searchBy}"
+                              onchange="{!c.handleChange}"
+                              type="button"
+                              />
+                    </div>
+                </div>
+            	
+                    
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+            	<lightning:input aura:id="searchBar" name="searchBar" label="Search Key: " />
+            </div>
+            
+        </div>
+        
+        
+        
+        <aura:set attribute="footer">
+            <lightning:button variant="brand" 
+                              label="Search" 
+                              onclick="{!c.clickSearch}"
+                              disabled="{!v.filterValue == undefined}"/>
+        </aura:set>
+    </lightning:card>
+    
+</aura:component>

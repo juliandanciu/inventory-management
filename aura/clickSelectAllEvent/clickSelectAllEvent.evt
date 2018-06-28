@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" >
+    <aura:attribute name="checkedState" type="Boolean" />
+    <aura:attribute name="allStockIdsArray" type="String[]" />
+</aura:event>

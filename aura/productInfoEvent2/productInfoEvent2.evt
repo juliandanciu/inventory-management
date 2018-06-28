@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event template">
+    <aura:attribute name="productList" type="Brawl_Mart_Product__c[]"/>
+</aura:event>

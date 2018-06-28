@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="event to send Store Location Information Up to harness">
+    <aura:attribute name="storeLocationsList" type="Location__c[]"/>
+</aura:event>

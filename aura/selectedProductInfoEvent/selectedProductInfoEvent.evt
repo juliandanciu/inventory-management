@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" >
+    <!-- can I find a way to send the whole object and not just the name? -->
+    <aura:attribute name="selectedProduct" type="String" />
+</aura:event>

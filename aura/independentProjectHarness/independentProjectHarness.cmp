@@ -1,0 +1,89 @@
+<!-- independentProjectHarness -->
+<aura:component implements="flexipage:availableForAllPageTypes" controller="LightningController" >
+    
+    <!-- ############ HANDLER HANDLER HANDLER HANDLER ############ -->
+    <aura:handler name="searchStockInfo" event="c:searchStockInfoEvent" 
+                  action="{!c.handleSearchStockInfoEvent}" />
+    <aura:handler name="addStockRecord" event="c:addStockRecordEvent" 
+                  action="{!c.handleAddStockRecordEvent}" />
+    <aura:handler name="clickSelectAll" event="c:clickSelectAllEvent" 
+                  action="{!c.handleClickSelectAllEvent}" />
+    <aura:handler name="sendStockIdUpToHarness" event="c:sendStockIdEvent" 
+                  action="{!c.handleSendStockIdEvent}" />
+    
+    <aura:handler name="childStocksInfo" event="c:childStocksInfoEvent" 
+                  action="{!c.handleChildStocksInfo}" />
+    
+    <aura:handler name="selectedLocationIdInfo" event="c:selectedLocationIdInfoEvent" 
+                  action="{!c.handleSelectedLocationIdInfo}" />
+    <aura:handler name="locationInfo" event="c:locationInfoEvent" 
+                  action="{!c.handleLocationInfo}"/>
+    <aura:handler name="productInfo" event="c:productInfoEvent" 
+                  action="{!c.handleProductInfo}"/>
+    
+    <aura:handler name="productCategoryInfo" event="c:productCategoryInfoEvent" 
+                  action="{!c.handleProductCategoryInfoEvent}" />
+    <aura:handler name="selectedProductInfo" event="c:selectedProductInfoEvent" 
+                  action="{!c.handleSelectedProductInfo}" />
+    <aura:handler name="resetListView" event="c:resetListViewEvent" 
+                  action="{!c.handleResetListViewEvent}" />
+    <aura:handler name="deletedStocksInfo" event="c:deletedStocksInfoEvent" 
+                  action="{!c.handleDeletedStocksInfo}" />
+    
+    <aura:handler name="savedStockInfo" event="c:savedStockInfoEvent"
+                  action="{!c.handleSavedStockInfoEvent}" />
+    
+    
+    <!-- ############ ATTRIBUTE ATTRIBUTE ATTRIBUTE ATTRIBUTE ############ -->
+    <aura:attribute name="childStocks" type="Stock__c[]" />
+    <aura:attribute name="childStocksSearchSubset" type="Stock__c[]" />
+    <aura:attribute name="displayChildStocks" type="Stock__c[]" />
+    <aura:attribute name="searchKey" type="String" />
+    <aura:attribute name="locationList" type="Location__c[]"/>
+    <aura:attribute name="selectedLocationId" type="String" default="None" />
+    <aura:attribute name="productMap" type="Map" />
+    <aura:attribute name="selectedCategory" type="String" />
+    <aura:attribute name="selectedProduct" type="Brawl_Mart_Product__c" />
+    <aura:attribute name="categories" type="String[]" />
+    <aura:attribute name="productSubset" type="String[]" />
+    
+    <aura:attribute name="selectedStockIdArray" type="String[]" />
+    
+    <!-- ############ COMPONENT COMPONENT COMPONENT COMPONENT ############ -->
+    
+    <c:selectBrawlMartStore locationList="{!v.locationList}"  />
+    
+    <aura:if isTrue="{!v.selectedLocationId != 'None'}">
+    	<c:searchBar selectedLocationId="{!v.selectedLocationId}"  />
+    	<c:stockListings selectedLocationId="{!v.selectedLocationId}"  
+                     searchKey="{!v.searchKey}" 
+                     displayChildStocks="{!v.displayChildStocks}" 
+                     childStocksSearchSubset="{!v.childStocksSearchSubset}" 
+                     childStocks="{!v.childStocks}" 
+                     selectedStockIdArray="{!v.selectedStockIdArray}" 
+                     selectedStockArray="{!v.selectedStockArray}" />
+        
+        <c:productCatalog selectedLocationId="{!v.selectedLocationId}"  
+                      productMap="{!v.productMap}" 
+                      categories="{!v.categories}" 
+                      productSubset="{!v.productSubset}" 
+                      selectedProduct="{!v.selectedProduct}" />
+    </aura:if>
+    
+    
+    
+    
+    
+    
+    
+    <!--lightning:button label="click to check state" onclick="{!c.stateCheck}" /-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</aura:component>

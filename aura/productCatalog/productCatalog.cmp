@@ -1,0 +1,68 @@
+<!-- productCatalog -->
+<aura:component controller="LightningController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:registerEvent name="addStockRecord" type="c:addStockRecordEvent" />
+    <aura:registerEvent name="productInfo" type="c:productInfoEvent"/>
+    <aura:registerEvent name="productCategoryInfo" type="c:productCategoryInfoEvent" />
+    <aura:registerEvent name="selectedProductInfo" type="c:selectedProductInfoEvent" />
+    
+    
+    <aura:attribute name="selectedLocationId" type="String" />
+    <aura:attribute name="productMap" type="Map" />
+    <aura:attribute name="selectedProduct" type="Brawl_Mart_Product__c" />
+    <aura:attribute name="categories" type="String[]" />
+    <aura:attribute name="productSubset" type="String[]" />
+    
+    <lightning:card >
+    	<aura:set attribute="title">
+        	<div class="slds-text-heading_medium slds-text-align_center">BRAWL-MART PRODUCT CATALOG</div>
+        </aura:set>
+        <div class="slds-grid">
+        	<div class="slds-col slds-size_3-of-12"></div>
+        	<div class="slds-col slds-size_5-of-12">
+            	<lightning:card title="SELECT PRODUCT">
+            		<lightning:select aura:id="selectCategory" name="selectCategory" label="Select a Category" onchange="{!c.selectCategoryChange}" >
+        				<option value="None">-- None --</option>
+        				<aura:iteration items="{!v.categories}" var="category">
+            				<option value="{!category}" text="{!category}"></option>
+        				</aura:iteration>
+    				</lightning:select>
+            
+            		<lightning:select aura:id="selectProduct" name="selectProduct" label="Select a Product" onchange="{!c.selectProductChange}" >
+        				<option value="None">-- None --</option>
+        				<aura:iteration items="{!v.productSubset}" var="product">
+            				<option value="{!product.Name}" text="{!product.Name}"></option>
+        				</aura:iteration>
+    				</lightning:select>
+        		</lightning:card>
+          
+        		<lightning:card title="PRICING $$$" variant="narrow">
+            		<div class="slds-text-heading_medium">
+        				Wholesale Price: <ui:outputCurrency aura:id="wholesale" value="{!v.selectedProduct.Wholesale_Price__c}"  />
+    				</div>
+            
+    				<div class="slds-text-heading_medium">
+        				Suggested Retail Price: <ui:outputCurrency aura:id="suggested" value="{!v.selectedProduct.Suggested_Retail_Price__c}" />
+    				</div>
+        		</lightning:card>
+            
+            
+            </div>
+            <div class="slds-col slds-size_3-of-12"></div>
+        </div>   
+        
+                    
+        <aura:set attribute="footer">
+        	<lightning:button variant="brand" 
+                              label="Add Product to Stock Listing" 
+                              value="{!v.selectedProduct}" 
+                              onclick="{!c.clickAddToStockListing}"
+                              disabled="{!v.selectedProduct == null}"/>
+        </aura:set>
+                
+    </lightning:card>
+        
+
+    
+</aura:component>
